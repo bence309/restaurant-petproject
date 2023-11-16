@@ -1,5 +1,7 @@
+// src/components/DrinkList.js
 import React, { useState, useEffect } from 'react';
 import { getDrinks } from '../api';
+import './ItemList.css';
 
 const DrinkList = () => {
   const [drinks, setDrinks] = useState([]);
@@ -18,17 +20,14 @@ const DrinkList = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Drink List</h2>
-      <ul>
-        {drinks.map((drink) => (
-          <li key={drink.id}>
-            <h3>{drink.name}</h3>
-            <p>Price: ${drink.price}</p>
-            <img src={drink.image} alt={drink.name} style={{ maxWidth: '200px' }} />
-          </li>
-        ))}
-      </ul>
+    <div className="item-list">
+      {drinks.map((drink) => (
+        <div key={drink.id} className="item-card">
+          <h3>{drink.name}</h3>
+          <p>Price: ${drink.price}</p>
+          <img src={drink.image} alt={drink.name} style={{ maxWidth: '200px' }} />
+        </div>
+      ))}
     </div>
   );
 };

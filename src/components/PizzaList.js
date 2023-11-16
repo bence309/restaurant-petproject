@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getPizzas } from '../api';
+import './ItemList.css';
 
 const PizzaList = () => {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    // Fetch pizza data when the component mounts
     const fetchPizzas = async () => {
       try {
         const pizzaData = await getPizzas();
@@ -19,18 +19,15 @@ const PizzaList = () => {
   }, []); 
 
   return (
-    <div>
-      <h2>Pizza List</h2>
-      <ul>
-        {pizzas.map((pizza) => (
-          <li key={pizza.id}>
-            <h3>{pizza.name}</h3>
-            <p>Ingredients: {pizza.ingredients.join(', ')}</p>
-            <p>Price: ${pizza.price}</p>
-            <img src={pizza.image} alt={pizza.name} style={{ maxWidth: '200px' }} />
-          </li>
-        ))}
-      </ul>
+    <div className="item-list">
+      {pizzas.map((pizza) => (
+        <div key={pizza.id} className="item-card">
+          <h3>{pizza.name}</h3>
+          <p>Ingredients: {pizza.ingredients.join(', ')}</p>
+          <p>Price: ${pizza.price}</p>
+          <img src={pizza.image} alt={pizza.name} style={{ maxWidth: '200px' }} />
+        </div>
+      ))}
     </div>
   );
 };
