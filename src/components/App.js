@@ -7,6 +7,7 @@ import DessertList from './DessertList';
 import SauceList from './SauceList';
 import PastaList from './PastaList';
 import SideList from './SideList';
+import SaladList from './SaladList';
 import Navigation from './Navigation';
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/sauces" element={<SauceList />} />
         <Route path="/pasta" element={<PastaList />} />
         <Route path="/sides" element={<SideList />} />
+        <Route path="/salads" element={<SaladList />} />
       </Routes>
     </Router>
   );

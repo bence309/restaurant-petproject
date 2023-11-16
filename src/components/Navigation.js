@@ -24,6 +24,9 @@ const Navigation = () => {
         <li>
           <Link to="/sides">Side Dishes</Link>
         </li>
+        <li>
+          <Link to="/salads">Salads</Link>
+        </li>
         {/* Add more links for other categories as needed */}
       </ul>
     </nav>

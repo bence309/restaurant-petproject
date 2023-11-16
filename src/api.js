@@ -10,5 +10,6 @@ export const getDesserts = () => api.get('/dessert').then((response) => response
 export const getSauces = () => api.get('/sauces').then((response) => response.data);
 export const getPastas = () => api.get('/pasta').then((response) => response.data);
 export const getSides = () => api.get('/sides').then((response) => response.data);
+export const getSalads = () => api.get('/salads').then((response) => response.data);
 
 // Add more API functions as needed
