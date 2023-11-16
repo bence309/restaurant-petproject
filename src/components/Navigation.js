@@ -12,6 +12,9 @@ const Navigation = () => {
         <li>
           <Link to="/drinks">Drinks</Link>
         </li>
+        <li>
+          <Link to="/dessert">Desserts</Link>
+        </li>
         {/* Add more links for other categories as needed */}
       </ul>
     </nav>
