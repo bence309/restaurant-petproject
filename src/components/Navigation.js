@@ -15,6 +15,15 @@ const Navigation = () => {
         <li>
           <Link to="/dessert">Desserts</Link>
         </li>
+        <li>
+          <Link to="/sauces">Sauces</Link>
+        </li>
+        <li>
+          <Link to="/pasta">Pastas</Link>
+        </li>
+        <li>
+          <Link to="/sides">Side Dishes</Link>
+        </li>
         {/* Add more links for other categories as needed */}
       </ul>
     </nav>
