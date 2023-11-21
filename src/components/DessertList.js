@@ -1,4 +1,3 @@
-// src/components/DessertList.js
 import React, { useState, useEffect } from 'react';
 import { getDesserts } from '../api';
 import './ItemList.css';

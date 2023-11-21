@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PizzaList from './PizzaList';
 import DrinkList from './DrinkList';
@@ -11,7 +11,11 @@ import Navigation from './Navigation';
 import Cart from './Cart';
 
 const App = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (item) => {
     setCart([...cart, item]);
@@ -30,7 +34,6 @@ const App = () => {
         <Route path="/salads" element={<SaladList addToCart={addToCart} />} />
         <Route path="/cart" element={<Cart cart={cart} />} />
       </Routes>
-      
     </Router>
   );
 };

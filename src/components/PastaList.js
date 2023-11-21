@@ -1,4 +1,3 @@
-// src/components/PastaList.js
 import React, { useState, useEffect } from 'react';
 import { getPastas } from '../api';
 import './ItemList.css';
