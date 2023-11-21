@@ -12,6 +12,7 @@ import Cart from './Cart';
 
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -19,6 +20,11 @@ const App = () => {
 
   const addToCart = (item) => {
     setCart([...cart, item]);
+    setMessage(`${item.name} added to cart!`);
+
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);
   };
 
   return (
@@ -34,6 +40,26 @@ const App = () => {
         <Route path="/salads" element={<SaladList addToCart={addToCart} />} />
         <Route path="/cart" element={<Cart cart={cart} />} />
       </Routes>
+      <div>
+        {/* Display the message with styling */}
+        {message && (
+          <div
+            style={{
+              position: 'fixed',
+              top: '70%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              background: 'lightgreen',
+              padding: '20px',
+              borderRadius: '5px',
+              boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+              zIndex: 999,
+            }}
+          >
+            <p>{message}</p>
+          </div>
+        )}
+      </div>
     </Router>
   );
 };
