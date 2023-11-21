@@ -27,6 +27,7 @@ const PizzaList = ({ addToCart }) => {
           <p>Ingredients: {pizza.ingredients.join(', ')}</p>
           <p>Price: ${pizza.price}</p>
           <img src={pizza.image} alt={pizza.name} style={{ maxWidth: '200px' }} />
+          <br/>
           <button onClick={() => addToCart(pizza)}>Add to Cart</button>
         </div>
       ))}

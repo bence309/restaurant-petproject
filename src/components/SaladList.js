@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getSalads } from '../api';
 import './ItemList.css';
 
-const SaladList = () => {
+const SaladList = ({ addToCart }) => {
   const [salads, setSalads] = useState([]);
 
   useEffect(() => {
@@ -26,6 +26,8 @@ const SaladList = () => {
           <p>Description: {salad.description}</p>
           <p>Price: ${salad.price}</p>
           <img src={salad.image} alt={salad.name} style={{ maxWidth: '200px' }} />
+          <br/>
+          <button onClick={() => addToCart(salad)}>Add to Cart</button>
         </div>
       ))}
     </div>
