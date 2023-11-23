@@ -27,6 +27,17 @@ const App = () => {
     }, 3000);
   };
 
+  const removeFromCart = (itemId) => {
+    const updatedCart = cart.filter((item) => item.id !== itemId);
+    setCart(updatedCart);
+    setMessage('Item removed from cart!');
+
+    // Clear the message after 3 seconds
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);
+  };
+
   return (
     <Router>
       <Navigation /> {/* Move inside the Router */}
@@ -38,7 +49,7 @@ const App = () => {
         <Route path="/pasta" element={<PastaList addToCart={addToCart} />} />
         <Route path="/sides" element={<SideList addToCart={addToCart} />} />
         <Route path="/salads" element={<SaladList addToCart={addToCart} />} />
-        <Route path="/cart" element={<Cart cart={cart} />} />
+        <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
       </Routes>
       <div>
         {/* Display the message with styling */}

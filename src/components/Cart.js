@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, removeFromCart }) => {
   return (
     <div className="item-list">
       {cart.map((item) => (
@@ -8,6 +8,7 @@ const Cart = ({ cart }) => {
           <h3>{item.name}</h3>
           <p>Price: ${item.price}</p>
           <img src={item.image} alt={item.name} style={{ maxWidth: '200px' }} />
+          <button onClick={() => removeFromCart(item.id)}>Delete</button>
         </div>
       ))}
     </div>
