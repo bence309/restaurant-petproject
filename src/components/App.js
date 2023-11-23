@@ -18,13 +18,14 @@ const App = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (item) => {
-    setCart([...cart, item]);
+  const addToCart = (item, category) => {
+    const uniqueId = `${category}_${item.id}`;
+    setCart([...cart, { ...item, id: uniqueId }]);
     setMessage(`${item.name} added to cart!`);
 
     setTimeout(() => {
       setMessage('');
-    }, 3000);
+    }, 1000);
   };
 
   const removeFromCart = (itemId) => {
@@ -34,12 +35,9 @@ const App = () => {
     setCart(updatedCart);
     setMessage('Item removed from cart!');
   
-  
-
-    // Clear the message after 3 seconds
     setTimeout(() => {
       setMessage('');
-    }, 3000);
+    }, 1000);
   };
 
   return (

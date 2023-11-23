@@ -27,7 +27,7 @@ const SideList = ({ addToCart }) => {
           <p>Price: ${side.price}</p>
           <img src={side.image} alt={side.name} style={{ maxWidth: '200px' }} />
           <br/>
-          <button onClick={() => addToCart(side)}>Add to Cart</button>
+          <button onClick={() => addToCart(side, 'side')}>Add to Cart</button>
         </div>
       ))}
     </div>

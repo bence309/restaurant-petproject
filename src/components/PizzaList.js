@@ -28,7 +28,7 @@ const PizzaList = ({ addToCart }) => {
           <p>Price: ${pizza.price}</p>
           <img src={pizza.image} alt={pizza.name} style={{ maxWidth: '200px' }} />
           <br/>
-          <button onClick={() => addToCart(pizza)}>Add to Cart</button>
+          <button onClick={() => addToCart(pizza, 'pizza')}>Add to Cart</button>
         </div>
       ))}
     </div>
