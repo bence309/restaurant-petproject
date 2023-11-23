@@ -28,9 +28,13 @@ const App = () => {
   };
 
   const removeFromCart = (itemId) => {
+    console.log('Removing item with id:', itemId);
     const updatedCart = cart.filter((item) => item.id !== itemId);
+    console.log('Updated cart:', updatedCart);
     setCart(updatedCart);
     setMessage('Item removed from cart!');
+  
+  
 
     // Clear the message after 3 seconds
     setTimeout(() => {
