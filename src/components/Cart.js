@@ -13,12 +13,23 @@ const Cart = ({ cart, removeFromCart }) => {
             <h3>{item.name}</h3>
             <p>Price: ${item.price}</p>
             <img src={item.image} alt={item.name} style={{ maxWidth: '200px' }} />
+            <br></br>
             <button onClick={() => removeFromCart(item.id)}>Delete</button>
           </div>
         ))}
       </div>
-      {/* Display the total price */}
-      <p>Total Price: ${total}</p>
+      {/* Display the total price with styling */}
+      <div style={{
+        textAlign: 'center',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        marginTop: '20px',
+        padding: '10px',
+        border: '2px solid #333',
+        borderRadius: '5px',
+      }}>
+        Total Price: ${total}
+      </div>
     </div>
   );
 };
