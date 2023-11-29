@@ -9,6 +9,7 @@ import SideList from './SideList';
 import SaladList from './SaladList';
 import Navigation from './Navigation';
 import Cart from './Cart';
+import RegistrationForm from './RegistrationForm';
 
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/sides" element={<SideList addToCart={addToCart} />} />
         <Route path="/salads" element={<SaladList addToCart={addToCart} />} />
         <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
+        <Route path="/register" element={<RegistrationForm />} />
       </Routes>
       <div>
         {/* Display the message with styling */}
