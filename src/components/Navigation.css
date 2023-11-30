@@ -26,4 +26,8 @@ nav {
     font-size: 35px;
     margin-right: 35px;
   }
+
+  .dark-mode nav {
+    background-color: #222;
+  }
   

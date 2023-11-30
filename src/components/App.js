@@ -16,6 +16,7 @@ import './ScrollToTop.css';
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
   const [message, setMessage] = useState('');
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -43,8 +44,14 @@ const App = () => {
     }, 1000);
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+
+  };
+
   return (
     <Router>
+      <div className={darkMode ? 'dark-mode' : 'light-mode'}>
       <Navigation /> {/* Move inside the Router */}
       <Routes>
         <Route path="/pizza" element={<PizzaList addToCart={addToCart} />} /> {/* Pass addToCart prop */}
@@ -77,6 +84,8 @@ const App = () => {
           </div>
         )}
         <ScrollToTop />
+      </div>
+      <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
       </div>
     </Router>
   );
