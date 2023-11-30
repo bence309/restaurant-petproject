@@ -12,6 +12,7 @@ import Cart from './Cart';
 import RegistrationForm from './RegistrationForm';
 import ScrollToTop from './ScrollToTop';
 import './ScrollToTop.css';
+import './App.css'
 
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
