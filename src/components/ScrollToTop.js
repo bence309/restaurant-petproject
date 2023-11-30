@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ScrollToTop.css'; 
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,7 +29,7 @@ const ScrollToTop = () => {
       className={`scroll-to-top ${isVisible ? 'visible' : ''}`}
       onClick={scrollToTop}
     >
-      Scroll to Top
+      &#9650; {/* Unicode character for an upward arrow */}
     </button>
   );
 };

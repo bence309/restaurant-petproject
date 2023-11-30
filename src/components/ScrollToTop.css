@@ -1,0 +1,25 @@
+.scroll-to-top {
+    position: fixed;
+    bottom: 50px;
+    right: 70px;
+    background-color: green; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 25px;
+    font-size: 20px;
+    cursor: pointer;
+    display: none; 
+    transition: all 0.2s ease-in-out; 
+  }
+  
+  .scroll-to-top.visible {
+    display: block; 
+  }
+  
+  .scroll-to-top:hover {
+    background-color: red; 
+    transform: translateY(-10px) scale(1.1); 
+    
+  }
+  
