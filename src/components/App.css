@@ -1,4 +1,25 @@
 .dark-mode {
-    background-color: #333; 
-    color: #fff; 
-  }
+  background-color: #333; /* Set dark mode background color */
+  color: #fff; /* Set dark mode text color */
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  left: 20px;
+  bottom: 70px;
+}
+
+.dark-mode-button {
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.dark-mode-button:hover {
+  background-color: #45a049;
+  transform: translateY(-5px) scale(1.05);
+}

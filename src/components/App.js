@@ -54,6 +54,11 @@ const App = () => {
     <Router>
       <div className={darkMode ? 'dark-mode' : 'light-mode'}>
       <Navigation /> {/* Move inside the Router */}
+      <div className="dark-mode-toggle">
+          <button onClick={toggleDarkMode} className="dark-mode-button">
+            {darkMode ? 'Toggle Light Mode' : 'Toggle Dark Mode'}
+          </button>
+        </div>
       <Routes>
         <Route path="/pizza" element={<PizzaList addToCart={addToCart} />} /> {/* Pass addToCart prop */}
         <Route path="/drinks" element={<DrinkList addToCart={addToCart} />} />
@@ -86,7 +91,6 @@ const App = () => {
         )}
         <ScrollToTop />
       </div>
-      <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
       </div>
     </Router>
   );
