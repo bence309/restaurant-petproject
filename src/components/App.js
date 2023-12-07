@@ -13,7 +13,7 @@ import RegistrationForm from './RegistrationForm';
 import ScrollToTop from './ScrollToTop';
 import './ScrollToTop.css';
 import './App.css';
-
+import Menu from './Menu';
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
   const [message, setMessage] = useState('');
@@ -72,6 +72,7 @@ const App = () => {
           <Route path="/salads" element={<SaladList addToCart={addToCart} />} />
           <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
           <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/menu" element={<Menu />} />
         </Routes>
         <div>
           {message && (

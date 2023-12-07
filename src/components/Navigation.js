@@ -33,6 +33,9 @@ const Navigation = () => {
         <li>
           <Link to="/register">Register</Link>
         </li>
+        <li>
+          <Link to="/menu">Menu</Link>
+        </li>
         {/* Add more links for other categories as needed */}
       </ul>
     </nav>
