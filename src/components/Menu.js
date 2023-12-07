@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
 
 const Menu = ({ pizzas, drinks, desserts }) => {
-  const generateRandomMenu = () => {
-    const randomPizza = pizzas[Math.floor(Math.random() * pizzas.length)];
-    const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
-    const randomDessert = desserts[Math.floor(Math.random() * desserts.length)];
-
-    const totalPrice = randomPizza.price + randomDrink.price + randomDessert.price;
-    const discountedPrice = totalPrice * 0.8;
-
-    return {
-      pizza: randomPizza,
-      drink: randomDrink,
-      dessert: randomDessert,
-      originalPrice: totalPrice,
-      discountedPrice,
-    };
-  };
+    const generateRandomMenu = () => {
+        if (!pizzas || !drinks || !desserts || !pizzas.length || !drinks.length || !desserts.length) {
+          return null; 
+        }
+      
+        const getRandomItem = (array) => array[Math.floor(Math.random() * array.length)];
+      
+        const randomPizza = getRandomItem(pizzas);
+        const randomDrink = getRandomItem(drinks);
+        const randomDessert = getRandomItem(desserts);
+      
+        const totalPrice = randomPizza.price + randomDrink.price + randomDessert.price;
+        const discountedPrice = totalPrice * 0.8;
+      
+        return {
+          pizza: randomPizza,
+          drink: randomDrink,
+          dessert: randomDessert,
+          originalPrice: totalPrice,
+          discountedPrice,
+        };
+      };
+      
 
   const [menu, setMenu] = useState(null);
 
