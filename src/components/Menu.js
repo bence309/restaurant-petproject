@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Menu = ({ pizzas, drinks, desserts }) => {
-    const generateRandomMenu = () => {
-        if (!pizzas || !drinks || !desserts || !pizzas.length || !drinks.length || !desserts.length) {
-          return null; 
-        }
-      
-        const getRandomItem = (array) => array[Math.floor(Math.random() * array.length)];
-      
-        const randomPizza = getRandomItem(pizzas);
-        const randomDrink = getRandomItem(drinks);
-        const randomDessert = getRandomItem(desserts);
-      
-        const totalPrice = randomPizza.price + randomDrink.price + randomDessert.price;
-        const discountedPrice = totalPrice * 0.8;
-      
-        return {
-          pizza: randomPizza,
-          drink: randomDrink,
-          dessert: randomDessert,
-          originalPrice: totalPrice,
-          discountedPrice,
-        };
-      };
-      
+  const generateRandomMenu = () => {
+    console.log('Pizzas:', pizzas);
+    console.log('Drinks:', drinks);
+    console.log('Desserts:', desserts);
+
+    if (!pizzas || !drinks || !desserts || !pizzas.length || !drinks.length || !desserts.length) {
+      console.log('Returning null');
+      return null;
+    }
+
+    const getRandomItem = (array) => array[Math.floor(Math.random() * array.length)];
+
+    const randomPizza = getRandomItem(pizzas);
+    const randomDrink = getRandomItem(drinks);
+    const randomDessert = getRandomItem(desserts);
+
+    const totalPrice = randomPizza.price + randomDrink.price + randomDessert.price;
+    const discountedPrice = totalPrice * 0.8;
+
+    return {
+      pizza: randomPizza,
+      drink: randomDrink,
+      dessert: randomDessert,
+      originalPrice: totalPrice,
+      discountedPrice,
+    };
+  };
 
   const [menu, setMenu] = useState(null);
 
   useEffect(() => {
     const randomMenu = generateRandomMenu();
+    console.log('Menu:', randomMenu);
     setMenu(randomMenu);
   }, [pizzas, drinks, desserts]);
 
