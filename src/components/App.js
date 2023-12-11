@@ -12,16 +12,38 @@ import Cart from './Cart';
 import RegistrationForm from './RegistrationForm';
 import ScrollToTop from './ScrollToTop';
 import './ScrollToTop.css';
-import './App.css';
 import Menu from './Menu';
+import './App.css';
+
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
   const [message, setMessage] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+  const [pizzas, setPizzas] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  const [desserts, setDesserts] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/db');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setPizzas(data.pizza);
+        setDrinks(data.drinks);
+        setDesserts(data.dessert);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    
+    
+
+    fetchData();
+  }, []);
 
   const addToCart = (item, category) => {
     const uniqueId = `${category}_${item.id}`;
@@ -72,7 +94,7 @@ const App = () => {
           <Route path="/salads" element={<SaladList addToCart={addToCart} />} />
           <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
           <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/menu" element={<Menu />} />
+          <Route path="/menu" element={<Menu pizzas={pizzas} drinks={drinks} desserts={desserts} />} />
         </Routes>
         <div>
           {message && (
