@@ -45,10 +45,11 @@ const App = () => {
     fetchData();
   }, []);
 
-  const addToCart = (item, category) => {
+  const addToCart = (item, category, quantity) => {
     const uniqueId = `${category}_${item.id}`;
-    setCart([...cart, { ...item, id: uniqueId }]);
-    setMessage(`${item.name} added to cart!`);
+    const itemsToAdd = Array.from({ length: quantity }, () => ({ ...item, id: uniqueId }));
+    setCart([...cart, ...itemsToAdd]);
+    setMessage(`${item.name} (Quantity: ${quantity}) added to cart!`);
 
     setTimeout(() => {
       setMessage('');
