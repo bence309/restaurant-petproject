@@ -57,15 +57,18 @@ const App = () => {
   };
 
   const removeFromCart = (itemId) => {
-    console.log('Removing item with id:', itemId);
-    const updatedCart = cart.filter((item) => item.id !== itemId);
-    console.log('Updated cart:', updatedCart);
-    setCart(updatedCart);
-    setMessage('Item removed from cart!');
-
-    setTimeout(() => {
-      setMessage('');
-    }, 1000);
+    const indexToRemove = cart.findIndex((item) => item.id === itemId);
+  
+    if (indexToRemove !== -1) {
+      const updatedCart = [...cart];
+      updatedCart.splice(indexToRemove, 1);
+      setCart(updatedCart);
+      setMessage('Item removed from cart!');
+  
+      setTimeout(() => {
+        setMessage('');
+      }, 1000);
+    }
   };
 
   const toggleDarkMode = () => {
