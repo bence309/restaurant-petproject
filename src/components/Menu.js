@@ -1,5 +1,6 @@
 // Menu.js
 import React, { useEffect, useState } from 'react';
+import "./Menu.css"
 
 const Menu = ({ pizzas, drinks, desserts }) => {
   const [menu, setMenu] = useState(null);
@@ -33,22 +34,33 @@ const Menu = ({ pizzas, drinks, desserts }) => {
   }
 
   return (
-    <div>
+    <div className="menu-container">
       <h2>Menu</h2>
-      <div>
-        <h3>{menu.pizza.name}</h3>
-        <p>Original Price: ${menu.pizza.price}</p>
-      </div>
-      <div>
-        <h3>{menu.drink.name}</h3>
-        <p>Original Price: ${menu.drink.price}</p>
-      </div>
-      <div>
-        <h3>{menu.dessert.name}</h3>
-        <p>Original Price: ${menu.dessert.price}</p>
+      <div className="menu-items">
+        <div className="menu-item">
+          <img src={menu.pizza.image} alt={menu.pizza.name} className="menu-image" />
+          <div>
+            <h3>{menu.pizza.name}</h3>
+            <p>Original Price: ${menu.pizza.price}</p>
+          </div>
+        </div>
+        <div className="menu-item">
+          <img src={menu.drink.image} alt={menu.drink.name} className="menu-image" />
+          <div>
+            <h3>{menu.drink.name}</h3>
+            <p>Original Price: ${menu.drink.price}</p>
+          </div>
+        </div>
+        <div className="menu-item">
+          <img src={menu.dessert.image} alt={menu.dessert.name} className="menu-image" />
+          <div>
+            <h3>{menu.dessert.name}</h3>
+            <p>Original Price: ${menu.dessert.price}</p>
+          </div>
+        </div>
       </div>
       <p>Total Original Price: ${menu.originalPrice.toFixed(2)}</p>
-      <p>Total Discounted Price: ${menu.discountedPrice.toFixed(2)}</p>
+      <p style={{ fontWeight: 'bold', fontSize: '25px' }}>Total Discounted Price(-20%): ${menu.discountedPrice.toFixed(2)}</p>
     </div>
   );
 };

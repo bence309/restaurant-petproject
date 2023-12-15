@@ -1,0 +1,22 @@
+
+.menu-container {
+    text-align: center;
+  }
+  
+  .menu-items {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu-image {
+    max-width: 250px; 
+    max-height: 250px;
+    margin-bottom: 10px;
+  }
