@@ -1,8 +1,10 @@
+// Navigation.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.css'; // Add this line
 
-const Navigation = () => {
+const Navigation = ({ isAuthenticated }) => {
   return (
     <nav>
       <ul>
@@ -36,6 +38,8 @@ const Navigation = () => {
         <li>
           <Link to="/menu">Menu</Link>
         </li>
+        <li>{isAuthenticated ? 'Welcome, User!' : 'Please Sign In'}
+        <Link to="/login"></Link></li>
         {/* Add more links for other categories as needed */}
       </ul>
     </nav>

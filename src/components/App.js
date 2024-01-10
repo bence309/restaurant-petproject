@@ -1,5 +1,6 @@
+// App.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PizzaList from './PizzaList';
 import DrinkList from './DrinkList';
 import DessertList from './DessertList';
@@ -10,6 +11,7 @@ import SaladList from './SaladList';
 import Navigation from './Navigation';
 import Cart from './Cart';
 import RegistrationForm from './RegistrationForm';
+import LoginForm from './LoginForm'; // Import the new LoginForm
 import ScrollToTop from './ScrollToTop';
 import './ScrollToTop.css';
 import Menu from './Menu';
@@ -19,9 +21,7 @@ const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
   const [message, setMessage] = useState('');
   const [darkMode, setDarkMode] = useState(false);
-  const [pizzas, setPizzas] = useState([]);
-  const [drinks, setDrinks] = useState([]);
-  const [desserts, setDesserts] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
   useEffect(() => {
     // Update local storage when the cart changes
@@ -41,13 +41,13 @@ const App = () => {
 
   const removeFromCart = (itemId) => {
     const indexToRemove = cart.findIndex((item) => item.id === itemId);
-  
+
     if (indexToRemove !== -1) {
       const updatedCart = [...cart];
       updatedCart.splice(indexToRemove, 1);
       setCart(updatedCart);
       setMessage('Item removed from cart!');
-  
+
       setTimeout(() => {
         setMessage('');
       }, 1000);
@@ -58,14 +58,19 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
-  useEffect(() => {
-    document.body.classList.toggle('dark-mode', darkMode);
-  }, [darkMode]);
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+  };
 
   return (
     <Router>
       <div className={darkMode ? 'app-container dark-mode' : 'app-container light-mode'}>
-        <Navigation />
+        <Navigation isAuthenticated={isAuthenticated} onLogout={handleLogout} />
         <div className="dark-mode-toggle">
           <button onClick={toggleDarkMode} className="dark-mode-button">
             {darkMode ? 'Toggle Light Mode' : 'Toggle Dark Mode'}
@@ -80,8 +85,18 @@ const App = () => {
           <Route path="/sides" element={<SideList addToCart={addToCart} />} />
           <Route path="/salads" element={<SaladList addToCart={addToCart} />} />
           <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/menu" element={<Menu pizzas={pizzas} drinks={drinks} desserts={desserts} />} />
+          <Route
+            path="/register"
+            element={isAuthenticated ? <Navigate to="/menu" /> : <RegistrationForm />}
+          />
+          <Route
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/menu" /> : <LoginForm onLogin={handleLogin} />}
+          />
+          <Route
+            path="/menu"
+            element={isAuthenticated ? <Menu /> : <Navigate to="/login" />}
+          />
         </Routes>
         <div>
           {message && (
