@@ -10,7 +10,7 @@ async function connectToDatabase() {
   try {
     await client.connect();
     console.log('Connected to the database');
-    return client.db(dbName).collection('registration');
+    return client.db(dbName).collection('restaurant'); // Use 'cart' as the collection name
   } catch (error) {
     console.error('Error connecting to the database:', error);
     throw error;
@@ -18,3 +18,4 @@ async function connectToDatabase() {
 }
 
 module.exports = { connectToDatabase };
+

@@ -24,26 +24,9 @@ const App = () => {
   const [desserts, setDesserts] = useState([]);
 
   useEffect(() => {
-    
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/db');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setPizzas(data.pizza);
-        setDrinks(data.drinks);
-        setDesserts(data.dessert);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    
-    
-
-    fetchData();
-  }, []);
+    // Update local storage when the cart changes
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (item, category, quantity) => {
     const uniqueId = `${category}_${item.id}`;
