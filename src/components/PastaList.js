@@ -4,12 +4,20 @@ import './ItemList.css';
 
 const PastaList = ({ addToCart }) => {
   const [pastas, setPastas] = useState([]);
+  const [quantity, setQuantity] = useState({});
 
   useEffect(() => {
     const fetchPastas = async () => {
       try {
         const pastaData = await getPastas();
         setPastas(pastaData);
+
+        // Initialize quantity for each pasta
+        const initialQuantity = pastaData.reduce((acc, pasta) => {
+          acc[pasta.id] = 1;
+          return acc;
+        }, {});
+        setQuantity(initialQuantity);
       } catch (error) {
         console.error('Error fetching pastas:', error);
       }
@@ -26,8 +34,14 @@ const PastaList = ({ addToCart }) => {
           <p>Ingredients: {pasta.ingredients.join(', ')}</p>
           <p>Price: ${pasta.price}</p>
           <img src={pasta.image} alt={pasta.name} style={{ maxWidth: '200px' }} />
-          <br/>
-          <button onClick={() => addToCart(pasta, 'pastas')}>Add to Cart</button>
+          <br />
+          {/* Quantity chooser */}
+          <div>
+            <button onClick={() => setQuantity((prev) => ({ ...prev, [pasta.id]: Math.max(prev[pasta.id] - 1, 1) }))}>-</button>
+            <span>{quantity[pasta.id]}</span>
+            <button onClick={() => setQuantity((prev) => ({ ...prev, [pasta.id]: prev[pasta.id] + 1 }))}>+</button>
+          </div>
+          <button onClick={() => addToCart(pasta, 'pastas', quantity[pasta.id])}>Add to Cart</button>
         </div>
       ))}
     </div>

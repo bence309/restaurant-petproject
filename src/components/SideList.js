@@ -4,12 +4,20 @@ import './ItemList.css';
 
 const SideList = ({ addToCart }) => {
   const [sides, setSides] = useState([]);
+  const [quantity, setQuantity] = useState({});
 
   useEffect(() => {
     const fetchSides = async () => {
       try {
         const sideData = await getSides();
         setSides(sideData);
+
+        // Initialize quantity for each side
+        const initialQuantity = sideData.reduce((acc, side) => {
+          acc[side.id] = 1;
+          return acc;
+        }, {});
+        setQuantity(initialQuantity);
       } catch (error) {
         console.error('Error fetching sides:', error);
       }
@@ -26,8 +34,14 @@ const SideList = ({ addToCart }) => {
           <p>Description: {side.description}</p>
           <p>Price: ${side.price}</p>
           <img src={side.image} alt={side.name} style={{ maxWidth: '200px' }} />
-          <br/>
-          <button onClick={() => addToCart(side, 'side')}>Add to Cart</button>
+          <br />
+          {/* Quantity chooser */}
+          <div>
+            <button onClick={() => setQuantity((prev) => ({ ...prev, [side.id]: Math.max(prev[side.id] - 1, 1) }))}>-</button>
+            <span>{quantity[side.id]}</span>
+            <button onClick={() => setQuantity((prev) => ({ ...prev, [side.id]: prev[side.id] + 1 }))}>+</button>
+          </div>
+          <button onClick={() => addToCart(side, 'side', quantity[side.id])}>Add to Cart</button>
         </div>
       ))}
     </div>
