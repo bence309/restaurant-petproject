@@ -27,6 +27,11 @@ app.use(async (req, res, next) => {
   next();
 });
 
+// New route for the root path
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the homepage!' });
+});
+
 app.post('/api/register', async (req, res) => {
   const { username, email, password } = req.body;
   const { db } = req;
@@ -46,7 +51,7 @@ app.post('/api/register', async (req, res) => {
 app.post(
   '/api/login',
   passport.authenticate('local', {
-    successRedirect: '/', // Change to the desired redirect route on successful login
+    successRedirect: '/dashboard', // Redirect to the dashboard on successful login
     failureRedirect: '/', // Change to the desired redirect route on failed login
     failureFlash: true,
   })
