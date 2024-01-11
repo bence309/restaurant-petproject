@@ -11,7 +11,7 @@ import SaladList from './SaladList';
 import Navigation from './Navigation';
 import Cart from './Cart';
 import RegistrationForm from './RegistrationForm';
-import LoginForm from './LoginForm'; // Import the new LoginForm
+import LoginForm from './LoginForm';
 import ScrollToTop from './ScrollToTop';
 import './ScrollToTop.css';
 import Menu from './Menu';
@@ -22,6 +22,32 @@ const App = () => {
   const [message, setMessage] = useState('');
   const [darkMode, setDarkMode] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+  const [pizzas, setPizzas] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  const [desserts, setDesserts] = useState([]);
+
+  useEffect(() => {
+    // Fetch pizzas, drinks, and desserts data
+    const fetchData = async () => {
+      try {
+        const pizzasResponse = await fetch('https://api.example.com/pizzas');
+        const drinksResponse = await fetch('https://api.example.com/drinks');
+        const dessertsResponse = await fetch('https://api.example.com/desserts');
+
+        const pizzasData = await pizzasResponse.json();
+        const drinksData = await drinksResponse.json();
+        const dessertsData = await dessertsResponse.json();
+
+        setPizzas(pizzasData);
+        setDrinks(drinksData);
+        setDesserts(dessertsData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     // Update local storage when the cart changes
@@ -95,7 +121,7 @@ const App = () => {
           />
           <Route
             path="/menu"
-            element={isAuthenticated ? <Menu /> : <Navigate to="/login" />}
+            element={<Menu pizzas={pizzas} drinks={drinks} desserts={desserts} />}
           />
         </Routes>
         <div>
@@ -124,3 +150,4 @@ const App = () => {
 };
 
 export default App;
+

@@ -38,12 +38,21 @@ const Navigation = ({ isAuthenticated }) => {
         <li>
           <Link to="/menu">Menu</Link>
         </li>
-        <li>{isAuthenticated ? 'Welcome, User!' : 'Please Sign In'}
-        <Link to="/login"></Link></li>
-        {/* Add more links for other categories as needed */}
+        <li>{isAuthenticated ? `Welcome, User!` : 'Please Sign In'}</li>
+        {!isAuthenticated && (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
 };
 
 export default Navigation;
+
