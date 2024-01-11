@@ -11,15 +11,16 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log('Form submitted'); // This line is for debugging
+  
     try {
-      // Send login data to the server
       const response = await axios.post('http://localhost:3002/api/login', formData);
-      console.log(response.data); // Handle success or display a success message
-
+      console.log(response.data);
+      // Handle success or display a success message
       // Redirect or handle success as needed
     } catch (error) {
-      console.error('Error logging in user:', error); // Handle error or display an error message
+      console.error('Error logging in user:', error);
+      // Handle error or display an error message
     }
   };
 
@@ -33,7 +34,7 @@ const LoginForm = () => {
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="post"> {/* Specify method="post" */}
         <div>
           <label htmlFor="email">Email:</label>
           <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
