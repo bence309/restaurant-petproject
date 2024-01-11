@@ -16,6 +16,17 @@ import ScrollToTop from './ScrollToTop';
 import './ScrollToTop.css';
 import Menu from './Menu';
 import './App.css';
+import './LoginForm.css'; // Include the LoginForm.css file
+
+const Home = ({ location }) => {
+  const welcomeMessage = location && location.state && location.state.welcomeMessage;
+  return (
+    <div>
+      <h2>Home</h2>
+      {welcomeMessage && <p>{welcomeMessage}</p>}
+    </div>
+  );
+};
 
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
@@ -25,6 +36,7 @@ const App = () => {
   const [pizzas, setPizzas] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [desserts, setDesserts] = useState([]);
+  const [username, setUsername] = useState(''); // New state to store the username
 
   useEffect(() => {
     // Fetch pizzas, drinks, and desserts data
@@ -84,13 +96,15 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (loggedInUsername) => {
     setIsAuthenticated(true);
+    setUsername(loggedInUsername); // Set the username in the state
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
+    setUsername(''); // Clear the username on logout
   };
 
   return (
@@ -115,9 +129,10 @@ const App = () => {
             path="/register"
             element={isAuthenticated ? <Navigate to="/menu" /> : <RegistrationForm />}
           />
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
-            element={isAuthenticated ? <Navigate to="/menu" /> : <LoginForm onLogin={handleLogin} />}
+            element={isAuthenticated ? <Navigate to="/" state={{ welcomeMessage: `Welcome, ${username}!` }} /> : <LoginForm onLogin={handleLogin} />}
           />
           <Route
             path="/menu"

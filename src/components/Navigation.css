@@ -1,33 +1,35 @@
 nav {
-    background-color: #333;
-    padding: 15px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-  
-  li {
-    margin-right: 20px;
-    transition: transform 0.3s ease-in-out;
-  }
+  background-color: #333;
+  padding: 15px;
+}
 
-  li:hover {
-    transform: scale(1.2);
-  }
-  
-  a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 35px;
-    margin-right: 35px;
-  }
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow the items to wrap to the next line on smaller screens */
+}
 
-  .dark-mode nav {
-    background-color: #222;
-  }
-  
+li {
+  margin-right: 20px;
+  margin-bottom: 10px; /* Add margin bottom for spacing between rows on smaller screens */
+  transition: transform 0.3s ease-in-out;
+}
+
+li:hover {
+  transform: scale(1.2);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px; /* Adjust the font size for smaller screens */
+  margin-right: 15px; /* Adjust margin for smaller screens */
+}
+
+/* Dark mode styles */
+.dark-mode nav {
+  background-color: #222;
+}

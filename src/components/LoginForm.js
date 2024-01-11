@@ -2,22 +2,30 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted'); // This line is for debugging
-  
+
     try {
       const response = await axios.post('http://localhost:3002/api/login', formData);
       console.log(response.data);
-      // Handle success or display a success message
-      // Redirect or handle success as needed
+
+      const { username } = response.data;
+
+      // Redirect to home page with welcome message
+      navigate('/', { state: { welcomeMessage: `Welcome, ${username}!` } });
+
+      // Call onLogin function with the username
+      onLogin(username);
     } catch (error) {
       console.error('Error logging in user:', error);
       // Handle error or display an error message
@@ -34,7 +42,7 @@ const LoginForm = () => {
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} method="post"> {/* Specify method="post" */}
+      <form onSubmit={handleSubmit} method="post">
         <div>
           <label htmlFor="email">Email:</label>
           <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
@@ -50,3 +58,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
