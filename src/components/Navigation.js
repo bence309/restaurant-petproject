@@ -8,6 +8,9 @@ const Navigation = ({ isAuthenticated, onLogout }) => {
     <nav>
       <ul>
         <li>
+          <Link to="/menu">Menu</Link>
+        </li>
+        <li>
           <Link to="/pizza">Pizzas</Link>
         </li>
         <li>
@@ -31,21 +34,20 @@ const Navigation = ({ isAuthenticated, onLogout }) => {
         <li>
           <Link to="/cart">Cart</Link>
         </li>
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
-        <li>
-          <Link to="/menu">Menu</Link>
-        </li>
         {isAuthenticated ? (
           <>
-            <li>
-              <button onClick={onLogout}>Logout</button>
+            <li className="right-link">
+              <Link to="/" onClick={onLogout}>
+                Logout
+              </Link>
             </li>
           </>
         ) : (
           <>
-            <li>
+            <li className="right-link register-login">
+              <Link to="/register">Register</Link>
+            </li>
+            <li className="right-link register-login">
               <Link to="/login">Login</Link>
             </li>
           </>
@@ -56,7 +58,3 @@ const Navigation = ({ isAuthenticated, onLogout }) => {
 };
 
 export default Navigation;
-
-
-
-

@@ -1,70 +1,44 @@
 // LoginForm.js
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './LoginForm.css'; // Include the external CSS file
 
-const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+const LoginForm = ({ onLogin }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [notification, setNotification] = useState('');
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
+    // Simulate a login request
+    // Replace this with your actual login logic, such as calling an authentication API
     try {
-      const response = await axios.post('http://localhost:3002/api/login', formData);
-      console.log('Login API Response:', response);
+      // Assuming you receive a token upon successful login
+      const token = 'your_generated_token'; // Replace with the actual token received
 
-      const welcomeMessage = response.data.message;
+      // Store the token in localStorage
+      localStorage.setItem('token', token);
 
-      // Display notification
-      setNotification('Successful login!');
-
-      // Delay for 3 seconds before navigating to home page
-      setTimeout(() => {
-        // Redirect to home page
-        navigate('/');
-        console.log('Navigation to home page triggered.');
-      }, 3000);
+      // Trigger the onLogin callback with the token
+      onLogin(token);
     } catch (error) {
-      console.error('Error logging in user:', error);
-      // Handle error or display an error message
+      console.error('Login failed:', error);
     }
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
   };
 
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} method="post">
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
-        </div>
+      <form onSubmit={handleLogin}>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <br />
         <button type="submit">Login</button>
       </form>
-
-      {/* Display notification */}
-      {notification && (
-        <div className="notification-box">
-          {notification}
-        </div>
-      )}
     </div>
   );
 };

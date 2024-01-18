@@ -15,7 +15,7 @@ import LoginForm from './LoginForm';
 import ScrollToTop from './ScrollToTop';
 import Menu from './Menu';
 import './App.css';
-import './LoginForm.css'; // Include the LoginForm.css file
+import './LoginForm.css';
 
 // Home component
 const Home = () => (
@@ -100,8 +100,21 @@ const App = () => {
   };
 
   const handleLogout = () => {
+    // Clear the token from localStorage and set isAuthenticated to false
     localStorage.removeItem('token');
     setIsAuthenticated(false);
+  };
+
+  const handleLogin = (token) => {
+    // Store the token in localStorage and set isAuthenticated to true
+    localStorage.setItem('token', token);
+    setIsAuthenticated(true);
+
+    // Display a message or perform any other actions upon successful login
+    setMessage('Successful login!');
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);
   };
 
   return (
@@ -132,15 +145,7 @@ const App = () => {
               isAuthenticated ? (
                 <Navigate to="/" />
               ) : (
-                <LoginForm
-                  onLogin={() => {
-                    setIsAuthenticated(true);
-                    setMessage('Successful login!');
-                    setTimeout(() => {
-                      setMessage('');
-                    }, 3000);
-                  }}
-                />
+                <LoginForm onLogin={handleLogin} />
               )
             }
           />
@@ -176,3 +181,4 @@ const App = () => {
 };
 
 export default App;
+
