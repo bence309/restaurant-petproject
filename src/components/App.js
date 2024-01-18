@@ -19,7 +19,9 @@ import './App.css';
 import './LoginForm.css'; // Include the LoginForm.css file
 
 const Home = ({ location }) => {
-  const welcomeMessage = location && location.state && location.state.welcomeMessage;
+  console.log('Location:', location);
+  const welcomeMessage = location.state && location.state.welcomeMessage;
+
   return (
     <div>
       <h2>Home</h2>
@@ -37,6 +39,7 @@ const App = () => {
   const [drinks, setDrinks] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [username, setUsername] = useState(''); // New state to store the username
+  const [locationState, setLocationState] = useState({}); // New state to manage location state
 
   useEffect(() => {
     // Fetch pizzas, drinks, and desserts data
@@ -96,10 +99,12 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
-  const handleLogin = (loggedInUsername) => {
+  const handleLogin = (loggedInUser) => {
+    console.log('loggedInUser:', loggedInUser); // Add this line for debugging
     setIsAuthenticated(true);
-    setUsername(loggedInUsername); // Set the username in the state
+    setLocationState({ welcomeMessage: `Welcome, ${loggedInUser.username}!` }); // Set the welcome message in the state
   };
+  
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -129,15 +134,21 @@ const App = () => {
             path="/register"
             element={isAuthenticated ? <Navigate to="/menu" /> : <RegistrationForm />}
           />
-          <Route path="/" element={<Home />} />
           <Route
             path="/login"
-            element={isAuthenticated ? <Navigate to="/" state={{ welcomeMessage: `Welcome, ${username}!` }} /> : <LoginForm onLogin={handleLogin} />}
+            element={
+              isAuthenticated ? (
+                <Navigate to="/" state={locationState} />
+              ) : (
+                <LoginForm onLogin={handleLogin} />
+              )
+            }
           />
           <Route
             path="/menu"
             element={<Menu pizzas={pizzas} drinks={drinks} desserts={desserts} />}
           />
+          <Route path="/" element={<Home location={{ state: locationState }} />} />
         </Routes>
         <div>
           {message && (
@@ -165,4 +176,3 @@ const App = () => {
 };
 
 export default App;
-

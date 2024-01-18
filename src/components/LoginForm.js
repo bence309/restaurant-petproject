@@ -1,5 +1,4 @@
 // LoginForm.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -21,11 +20,13 @@ const LoginForm = ({ onLogin }) => {
 
       const { username } = response.data;
 
+      // Call onLogin function with an object containing the username
+      onLogin({ username });
+
       // Redirect to home page with welcome message
       navigate('/', { state: { welcomeMessage: `Welcome, ${username}!` } });
 
-      // Call onLogin function with the username
-      onLogin(username);
+      console.log('Navigation to home page triggered.');
     } catch (error) {
       console.error('Error logging in user:', error);
       // Handle error or display an error message
@@ -58,4 +59,3 @@ const LoginForm = ({ onLogin }) => {
 };
 
 export default LoginForm;
-
