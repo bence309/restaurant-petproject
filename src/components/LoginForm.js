@@ -2,13 +2,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './LoginForm.css'; // Include the external CSS file
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
+  const [notification, setNotification] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,17 +18,19 @@ const LoginForm = ({ onLogin }) => {
 
     try {
       const response = await axios.post('http://localhost:3002/api/login', formData);
-      console.log(response.data);
+      console.log('Login API Response:', response);
 
-      const { username } = response.data;
+      const welcomeMessage = response.data.message;
 
-      // Call onLogin function with an object containing the username
-      onLogin({ username });
+      // Display notification
+      setNotification('Successful login!');
 
-      // Redirect to home page with welcome message
-      navigate('/', { state: { welcomeMessage: `Welcome, ${username}!` } });
-
-      console.log('Navigation to home page triggered.');
+      // Delay for 3 seconds before navigating to home page
+      setTimeout(() => {
+        // Redirect to home page
+        navigate('/');
+        console.log('Navigation to home page triggered.');
+      }, 3000);
     } catch (error) {
       console.error('Error logging in user:', error);
       // Handle error or display an error message
@@ -54,6 +58,13 @@ const LoginForm = ({ onLogin }) => {
         </div>
         <button type="submit">Login</button>
       </form>
+
+      {/* Display notification */}
+      {notification && (
+        <div className="notification-box">
+          {notification}
+        </div>
+      )}
     </div>
   );
 };

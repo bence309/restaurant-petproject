@@ -51,10 +51,17 @@ app.post('/api/register', async (req, res) => {
 app.post(
   '/api/login',
   passport.authenticate('local', {
-    successRedirect: '/dashboard', // Redirect to the dashboard on successful login
-    failureRedirect: '/', // Change to the desired redirect route on failed login
+    successRedirect: '/dashboard',
+    failureRedirect: '/',
     failureFlash: true,
-  })
+  }),
+  (req, res) => {
+    console.log('User after authentication:', req.user); // Log the user information
+    res.status(200).json({
+      username: req.user.username,
+      message: 'Welcome to the dashboard!',
+    });
+  }
 );
 
 app.get('/dashboard', (req, res) => {

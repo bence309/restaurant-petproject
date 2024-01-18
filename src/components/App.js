@@ -18,17 +18,13 @@ import Menu from './Menu';
 import './App.css';
 import './LoginForm.css'; // Include the LoginForm.css file
 
-const Home = ({ location }) => {
-  console.log('Location:', location);
-  const welcomeMessage = location.state && location.state.welcomeMessage;
-
-  return (
-    <div>
-      <h2>Home</h2>
-      {welcomeMessage && <p>{welcomeMessage}</p>}
-    </div>
-  );
-};
+// Home component
+const Home = () => (
+  <div>
+    <h2>Home</h2>
+    {/* No welcome message needed */}
+  </div>
+);
 
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
@@ -38,8 +34,6 @@ const App = () => {
   const [pizzas, setPizzas] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [desserts, setDesserts] = useState([]);
-  const [username, setUsername] = useState(''); // New state to store the username
-  const [locationState, setLocationState] = useState({}); // New state to manage location state
 
   useEffect(() => {
     // Fetch pizzas, drinks, and desserts data
@@ -99,17 +93,9 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
-  const handleLogin = (loggedInUser) => {
-    console.log('loggedInUser:', loggedInUser); // Add this line for debugging
-    setIsAuthenticated(true);
-    setLocationState({ welcomeMessage: `Welcome, ${loggedInUser.username}!` }); // Set the welcome message in the state
-  };
-  
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
-    setUsername(''); // Clear the username on logout
   };
 
   return (
@@ -138,9 +124,17 @@ const App = () => {
             path="/login"
             element={
               isAuthenticated ? (
-                <Navigate to="/" state={locationState} />
+                <Navigate to="/" />
               ) : (
-                <LoginForm onLogin={handleLogin} />
+                <LoginForm
+                  onLogin={() => {
+                    setIsAuthenticated(true);
+                    setMessage('Successful login!');
+                    setTimeout(() => {
+                      setMessage('');
+                    }, 3000);
+                  }}
+                />
               )
             }
           />
@@ -148,14 +142,14 @@ const App = () => {
             path="/menu"
             element={<Menu pizzas={pizzas} drinks={drinks} desserts={desserts} />}
           />
-          <Route path="/" element={<Home location={{ state: locationState }} />} />
+          <Route path="/" element={<Home />} />
         </Routes>
         <div>
           {message && (
             <div
               style={{
                 position: 'fixed',
-                top: '70%',
+                top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
                 background: 'lightgreen',
