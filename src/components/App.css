@@ -1,15 +1,31 @@
-.dark-mode {
-  background-color: #333;
-  color: #fff;
+/* App.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0; /* Set a light background color as a fallback */
 }
 
-.dark-mode-toggle {
-  position: fixed;
-  left: 20px;
-  bottom: 70px;
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.light-mode {
+  background-color: #ffffff; /* Light mode background color */
+  color: #333333; /* Light mode text color */
+}
+
+.dark-mode {
+  background-color: #222222; /* Dark mode background color */
+  color: #ffffff; /* Dark mode text color */
 }
 
 .dark-mode-button {
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  left: 20px; /* Adjust the distance from the right as needed */
   padding: 10px;
   background-color: #4caf50;
   color: #fff;
@@ -19,7 +35,4 @@
   transition: all 0.2s ease-in-out;
 }
 
-.dark-mode-button:hover {
-  background-color: #45a049;
-  transform: translateY(-5px) scale(1.05);
-}
+/* Add your other styles here */

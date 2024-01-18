@@ -101,7 +101,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className={darkMode ? 'app-container dark-mode' : 'app-container light-mode'}>
+      <div className={`app-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
         <Navigation isAuthenticated={isAuthenticated} onLogout={handleLogout} />
         <div className="dark-mode-toggle">
           <button onClick={toggleDarkMode} className="dark-mode-button">
