@@ -1,10 +1,9 @@
 // Navigation.js
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navigation.css'; // Add this line
+import './Navigation.css';
 
-const Navigation = ({ isAuthenticated }) => {
+const Navigation = ({ isAuthenticated, onLogout }) => {
   return (
     <nav>
       <ul>
@@ -38,7 +37,13 @@ const Navigation = ({ isAuthenticated }) => {
         <li>
           <Link to="/menu">Menu</Link>
         </li>
-        {!isAuthenticated && (
+        {isAuthenticated ? (
+          <>
+            <li>
+              <button onClick={onLogout}>Logout</button>
+            </li>
+          </>
+        ) : (
           <>
             <li>
               <Link to="/login">Login</Link>
@@ -51,4 +56,7 @@ const Navigation = ({ isAuthenticated }) => {
 };
 
 export default Navigation;
+
+
+
 

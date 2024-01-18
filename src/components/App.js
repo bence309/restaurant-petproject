@@ -13,7 +13,6 @@ import Cart from './Cart';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 import ScrollToTop from './ScrollToTop';
-import './ScrollToTop.css';
 import Menu from './Menu';
 import './App.css';
 import './LoginForm.css'; // Include the LoginForm.css file
@@ -29,11 +28,13 @@ const Home = () => (
 const App = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
   const [message, setMessage] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
   const [pizzas, setPizzas] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [desserts, setDesserts] = useState([]);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem('darkMode') === 'true' || false
+  );
 
   useEffect(() => {
     // Fetch pizzas, drinks, and desserts data
@@ -54,7 +55,6 @@ const App = () => {
         console.error('Error fetching data:', error);
       }
     };
-    
 
     fetchData();
   }, []);
@@ -63,6 +63,11 @@ const App = () => {
     // Update local storage when the cart changes
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    // Update local storage when the dark mode changes
+    localStorage.setItem('darkMode', darkMode.toString());
+  }, [darkMode]);
 
   const addToCart = (item, category, quantity) => {
     const uniqueId = `${category}_${item.id}`;
@@ -91,7 +96,7 @@ const App = () => {
   };
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
   const handleLogout = () => {
