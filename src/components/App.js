@@ -39,14 +39,14 @@ const App = () => {
     // Fetch pizzas, drinks, and desserts data
     const fetchData = async () => {
       try {
-        const pizzasResponse = await fetch('https://api.example.com/pizzas');
-        const drinksResponse = await fetch('https://api.example.com/drinks');
-        const dessertsResponse = await fetch('https://api.example.com/desserts');
-
+        const pizzasResponse = await fetch('http://localhost:3001/pizza');
+        const drinksResponse = await fetch('http://localhost:3001/drinks');
+        const dessertsResponse = await fetch('http://localhost:3001/dessert');
+    
         const pizzasData = await pizzasResponse.json();
         const drinksData = await drinksResponse.json();
         const dessertsData = await dessertsResponse.json();
-
+    
         setPizzas(pizzasData);
         setDrinks(drinksData);
         setDesserts(dessertsData);
@@ -54,6 +54,7 @@ const App = () => {
         console.error('Error fetching data:', error);
       }
     };
+    
 
     fetchData();
   }, []);
