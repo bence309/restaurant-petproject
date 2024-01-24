@@ -26,12 +26,13 @@ const LoginForm = ({ onLogin }) => {
     } catch (error) {
       console.error('Login failed:', error);
       setError(error.response?.data?.message || 'Login failed');
+      setSuccessMessage(null); // Clear any previous success message
     }
   };
 
   const closeNotification = () => {
-    setSuccessMessage(null);
     setError(null);
+    setSuccessMessage(null);
   };
 
   return (
@@ -39,10 +40,12 @@ const LoginForm = ({ onLogin }) => {
       <h2>Login</h2>
       {/* Display success message */}
       {successMessage && (
-        <Notification message={successMessage} onClose={closeNotification} />
+        <Notification message={successMessage} type="success" onClose={closeNotification} />
       )}
       {/* Display error message */}
-      {error && <div className="error">{error}</div>}
+      {error && (
+        <Notification message={error} type="error" onClose={closeNotification} />
+      )}
       <form onSubmit={handleLogin}>
         <label>
           Email:
