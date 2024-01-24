@@ -12,7 +12,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const userSchema = new mongoose.Schema({
   username: String,
   email: String,
-  password: String,
+  password: String, // This field now stores the hashed password
 });
 
 const User = mongoose.model('User', userSchema);
@@ -29,5 +29,4 @@ async function connectToDatabase() {
 }
 
 module.exports = { db, User, connectToDatabase };
-
 

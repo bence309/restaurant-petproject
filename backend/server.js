@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
+const bcrypt = require('bcrypt'); // Added bcrypt
 const { connectToDatabase } = require('./db');
 const initializePassport = require('./passport');
 
@@ -38,7 +39,11 @@ app.post('/api/register', async (req, res) => {
 
   try {
     const User = await connectToDatabase();
-    const newUser = new User({ username, email, password });
+
+    // Hash the password using bcrypt
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });
