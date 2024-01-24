@@ -53,21 +53,16 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-app.post(
-  '/api/login',
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/',
-    failureFlash: true,
-  }),
-  (req, res) => {
-    console.log('User after authentication:', req.user); // Log the user information
-    res.status(200).json({
-      username: req.user.username,
-      message: 'Welcome to the dashboard!',
-    });
-  }
-);
+app.post('/api/login', passport.authenticate('local', {
+  failureFlash: true, // Remove this line or set it to false
+}), (req, res) => {
+  // This part will be executed if authentication is successful
+  console.log('User after authentication:', req.user);
+  res.status(200).json({
+    username: req.user.username,
+    message: 'Successful login!', // Modify the success message as needed
+  });
+});
 
 app.get('/dashboard', (req, res) => {
   res.json({ message: 'Welcome to the dashboard!' });
