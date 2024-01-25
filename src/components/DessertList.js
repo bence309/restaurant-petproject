@@ -12,7 +12,6 @@ const DessertList = ({ addToCart }) => {
         const dessertData = await getDesserts();
         setDesserts(dessertData);
 
-        // Initialize quantity for each dessert
         const initialQuantity = dessertData.reduce((acc, dessert) => {
           acc[dessert.id] = 1;
           return acc;

@@ -1,9 +1,8 @@
-/* App.css */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0; /* Set a light background color as a fallback */
+  background-color: #f0f0f0; 
 }
 
 .app-container {
@@ -13,19 +12,19 @@ body {
 }
 
 .light-mode {
-  background-color: #ffffff; /* Light mode background color */
-  color: #333333; /* Light mode text color */
+  background-color: #ffffff; 
+  color: #333333; 
 }
 
 .dark-mode {
-  background-color: #222222; /* Dark mode background color */
-  color: #ffffff; /* Dark mode text color */
+  background-color: #222222; 
+  color: #ffffff;
 }
 
 .dark-mode-button {
   position: fixed;
-  bottom: 20px; /* Adjust the distance from the bottom as needed */
-  left: 20px; /* Adjust the distance from the right as needed */
+  bottom: 20px; 
+  left: 20px; 
   padding: 10px;
   background-color: #4caf50;
   color: #fff;
@@ -35,4 +34,3 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-/* Add your other styles here */

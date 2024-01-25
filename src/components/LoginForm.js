@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Notification from './Notification'; // Import the Notification component
+import Notification from './Notification';
 
 const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -26,7 +26,7 @@ const LoginForm = ({ onLogin }) => {
     } catch (error) {
       console.error('Login failed:', error);
       setError(error.response?.data?.message || 'Login failed');
-      setSuccessMessage(null); // Clear any previous success message
+      setSuccessMessage(null);
     }
   };
 

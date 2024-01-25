@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PizzaList from './PizzaList';
@@ -17,11 +16,9 @@ import Menu from './Menu';
 import './App.css';
 import './LoginForm.css';
 
-// Home component
 const Home = () => (
   <div>
     <h2>Home</h2>
-    {/* No welcome message needed */}
   </div>
 );
 
@@ -37,7 +34,6 @@ const App = () => {
   );
 
   useEffect(() => {
-    // Fetch pizzas, drinks, and desserts data
     const fetchData = async () => {
       try {
         const pizzasResponse = await fetch('http://localhost:3001/pizza');
@@ -60,12 +56,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // Update local storage when the cart changes
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
-    // Update local storage when the dark mode changes
     localStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode]);
 
@@ -100,17 +94,13 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    // Clear the token from localStorage and set isAuthenticated to false
     localStorage.removeItem('token');
     setIsAuthenticated(false);
   };
 
   const handleLogin = (token) => {
-    // Store the token in localStorage and set isAuthenticated to true
     localStorage.setItem('token', token);
     setIsAuthenticated(true);
-
-    // Display a message or perform any other actions upon successful login
     setMessage('Successful login!');
     setTimeout(() => {
       setMessage('');

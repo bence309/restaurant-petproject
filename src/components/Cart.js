@@ -1,7 +1,5 @@
 import React from 'react';
 
-// ...
-
 const Cart = ({ cart, removeFromCart }) => {
   const total = cart.reduce((acc, item) => acc + item.price, 0);
 
