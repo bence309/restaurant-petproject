@@ -12,7 +12,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const userSchema = new mongoose.Schema({
   username: String,
   email: String,
-  password: String, // This field now stores the hashed password
+  password: String,
 });
 
 const User = mongoose.model('User', userSchema);
@@ -21,7 +21,7 @@ async function connectToDatabase() {
   try {
     await db;
     console.log('Connected to the database');
-    return User; // Return the User model directly
+    return User;
   } catch (error) {
     console.error('Error connecting to the database:', error);
     throw error;

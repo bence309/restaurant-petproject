@@ -11,7 +11,6 @@ const DrinkList = ({ addToCart }) => {
       try {
         const drinkData = await getDrinks();
         setDrinks(drinkData);
-
         const initialQuantity = drinkData.reduce((acc, drink) => {
           acc[drink.id] = 1;
           return acc;

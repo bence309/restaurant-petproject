@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Notification from './Notification'; // Import the Notification component
+import Notification from './Notification';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({

@@ -14,6 +14,6 @@
   }
   
   .notification-box.error {
-    background: #d62d2d; /* Use a red color of your choice */
-    color: white; /* Set text color for better visibility */
+    background: #d62d2d; 
+    color: white; 
   }

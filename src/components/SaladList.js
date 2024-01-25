@@ -11,8 +11,6 @@ const SaladList = ({ addToCart }) => {
       try {
         const saladData = await getSalads();
         setSalads(saladData);
-
-        // Initialize quantity for each salad
         const initialQuantity = saladData.reduce((acc, salad) => {
           acc[salad.id] = 1;
           return acc;

@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
-const bcrypt = require('bcrypt'); // Added bcrypt
+const bcrypt = require('bcrypt');
 const { connectToDatabase } = require('./db');
 const initializePassport = require('./passport');
 
@@ -28,7 +28,6 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// New route for the root path
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the homepage!' });
 });
@@ -39,10 +38,7 @@ app.post('/api/register', async (req, res) => {
 
   try {
     const User = await connectToDatabase();
-
-    // Hash the password using bcrypt
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
@@ -54,13 +50,13 @@ app.post('/api/register', async (req, res) => {
 });
 
 app.post('/api/login', passport.authenticate('local', {
-  failureFlash: true, // Remove this line or set it to false
+  failureFlash: true,
 }), (req, res) => {
-  // This part will be executed if authentication is successful
+
   console.log('User after authentication:', req.user);
   res.status(200).json({
     username: req.user.username,
-    message: 'Successful login!', // Modify the success message as needed
+    message: 'Successful login!',
   });
 });
 

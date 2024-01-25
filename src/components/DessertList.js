@@ -11,7 +11,6 @@ const DessertList = ({ addToCart }) => {
       try {
         const dessertData = await getDesserts();
         setDesserts(dessertData);
-
         const initialQuantity = dessertData.reduce((acc, dessert) => {
           acc[dessert.id] = 1;
           return acc;

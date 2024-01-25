@@ -39,11 +39,11 @@ const App = () => {
         const pizzasResponse = await fetch('http://localhost:3001/pizza');
         const drinksResponse = await fetch('http://localhost:3001/drinks');
         const dessertsResponse = await fetch('http://localhost:3001/dessert');
-    
+
         const pizzasData = await pizzasResponse.json();
         const drinksData = await drinksResponse.json();
         const dessertsData = await dessertsResponse.json();
-    
+
         setPizzas(pizzasData);
         setDrinks(drinksData);
         setDesserts(dessertsData);

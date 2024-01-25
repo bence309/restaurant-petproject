@@ -11,8 +11,6 @@ const SauceList = ({ addToCart }) => {
       try {
         const sauceData = await getSauces();
         setSauces(sauceData);
-
-        // Initialize quantity for each sauce
         const initialQuantity = sauceData.reduce((acc, sauce) => {
           acc[sauce.id] = 1;
           return acc;

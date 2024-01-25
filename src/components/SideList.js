@@ -11,8 +11,6 @@ const SideList = ({ addToCart }) => {
       try {
         const sideData = await getSides();
         setSides(sideData);
-
-        // Initialize quantity for each side
         const initialQuantity = sideData.reduce((acc, side) => {
           acc[side.id] = 1;
           return acc;

@@ -11,8 +11,6 @@ const PastaList = ({ addToCart }) => {
       try {
         const pastaData = await getPastas();
         setPastas(pastaData);
-
-        // Initialize quantity for each pasta
         const initialQuantity = pastaData.reduce((acc, pasta) => {
           acc[pasta.id] = 1;
           return acc;
