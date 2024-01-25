@@ -6,7 +6,7 @@ Features:
 
 Intuitive Cart System: Users can easily add delicious items to their cart, making the pizza-ordering experience seamless and enjoyable.
 
-User Authentication: The app provides a login and logout system, ensuring a personalized experience for every user.
+User Authentication: The app provides a secure login and logout system, ensuring a personalized experience for every user. It uses the BCRYPT package to secure the sensitive data of the user, the password is stored hashed in the database.
 
 Dynamic Quantity Adjustments: Customize your order before adding items to the cart. The app allows users to dynamically adjust the quantity of items during the selection process.
 
